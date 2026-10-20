@@ -1,13 +1,10 @@
 class Solution {
+    public int count=0;
     public boolean isSafe(int[][] board, int r, int c) {
         for (int i = 0; i < r; i++)
             if (board[i][c] == 1)
                 return false;
-
-        for (int i = 0; i <c; i++)
-            if (board[r][i] == 1)
-                return false;
-
+ 
         
         int row=r-1;
         int col=c-1;
@@ -26,30 +23,23 @@ class Solution {
 
     public int totalNQueens(int n) {
         int[][] board = new int[n][n];
-        List<List<List<Integer>>> ans=new ArrayList<>();
-        helper(ans,board,  0);
-        return ans.size();
+        helper(board,  0);
+        return count;
     }
 
-    public void helper(List<List<List<Integer>>> ans,int[][] board, int r) {
+    public void helper(int[][] board, int r) {
         if(r==board.length){
-    List<List<Integer>> l2=new ArrayList<>();
-            for(int i=0;i<board.length;i++){
-                List<Integer> l1=new ArrayList<>();
-                for(int j=0;j<board.length;j++){
-                    l1.add(board[i][j]);
-                }
-                l2.add(l1);
-            }
-            ans.add(l2);
+            count++;
             return ;
         }
         for(int i=0;i<board.length;i++){
         if(isSafe(board,r,i)){
             board[r][i]=1;
-            helper(ans,board, r+1);
+            helper(board, r+1);
         board[r][i]=0;
         }
         }
-        }
     }
+        
+}
+    
